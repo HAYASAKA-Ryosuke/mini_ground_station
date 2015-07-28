@@ -16,11 +16,11 @@ class RadioControl:
 
     def aos_los_display(self):
         sataz, satalt, satfreq, risetime, settime, mel = self.orbit_calc.CalcObserve()
-        print(str(risetime))
-        print(str(settime))
+        print('AOS:' + str(risetime) + ' LOS:' + str(settime))
 
     def start(self):
         sataz, satalt, satfreq, risetime, settime, mel = self.orbit_calc.CalcObserve()
+        print('AZ:' + str(sataz) + ' EL:' + str(satalt))
         requests.get("http://localhost:10100/frequency/human/" + str(satfreq) + 'M')
 
 

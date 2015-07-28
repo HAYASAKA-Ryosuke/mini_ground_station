@@ -5,13 +5,10 @@ from orbitcalc import Orbitcalc
 
 
 class RadioControl:
-    def __init__(self, gslat, gslon, gselev):
+    def __init__(self, sat_name, gslat, gslon, gselev, tle1, tle2, freq):
         self.orbit_calc = Orbitcalc(gslat, gslon, gselev)
-        tle1 = "1 07530U 74089B   15207.90021439 -.00000041  00000-0  17621-4 0  9993"
-        tle2 = "2 07530 101.5250 182.2818 0011540 224.6195 190.1591 12.53615505862231"
-        freq = "145.972"
         self.orbit_calc.SatInfo(
-            'NOAA18',
+            sat_name,
             tle1,
             tle2,
             freq
@@ -28,9 +25,14 @@ class RadioControl:
 
 
 if __name__ == '__main__':
+    sat_name = 'NOAA18'
     lat = '35.642923'
     lon = '139.748864'
-    radio_control = RadioControl(gslat=lat, gslon=lon, gselev=30)
+    elev = 30
+    tle1 = "1 07530U 74089B   15207.90021439 -.00000041  00000-0  17621-4 0  9993"
+    tle2 = "2 07530 101.5250 182.2818 0011540 224.6195 190.1591 12.53615505862231"
+    freq = "145.972"
+    radio_control = RadioControl(sat_name, lat, lon, elev, tle1, tle2, freq)
     radio_control.aos_los_display()
     while True:
         radio_control.start()
